@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    {#    <link href="../node_modules/bootstrap-table/src/bootstrap-table.scss" rel="stylesheet">#}
+    {#    <link href="static/css/tableexport.min.css" rel="stylesheet">#}
+    {#    <link href="static/css/tableexport.css" rel="stylesheet">#}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {#    <script src="../node_modules/file-saverjs/FileSaver.min.js"></script>#}
+    <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    <link rel="icon" href="{% static 'img/logo.jpg' %}" type="image">
+</head>
+<body>
+<ul class="nav justify-content-center m-1">
+    <li class="nav-item">
+        <a class="nav-link active" href="/">Главная</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            Добавить
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/product">Изделие</a></li>
+            <li><a class="dropdown-item" href="/details">Деталь</a></li>
+            <li><a class="dropdown-item" href="/materials">Материал или комплектующее</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            Таблица
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/product_total">Изделий</a></li>
+            <li><a class="dropdown-item" href="/detail_total">Деталей</a></li>
+            <li><a class="dropdown-item" href="/materials_total">Материалов или комплектующих</a></li>
+            <li><a class="dropdown-item" href="/general_table">Общая таблица</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="/admin">Админ-панель</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="/accounts/login">Логин</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="/accounts/logout/">Logout</a>
+    </li>
+</ul>
+{% block content %} {% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+<script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+{#<script src="../node_modules/bootstrap-table/src/bootstrap-table.js"></script>#}
+{#<script src="../node_modules/bootstrap-table/src/extensions/export/bootstrap-table-export.js"></script>#}
+{#<script src="static/js/tableexport.js"></script>#}
+{#<script src="static/js/tableexport.min.js"></script>#}
+{#<script src="static/js/FileSaver.min.js"></script>#}
+{#<script src="static/js/FileSaver.js"></script>#}
+<script src="{% static 'js/script.js' %}"></script>
+{#<script src="{% static 'js/time_date.js' %}"></script>#}
+<script src="{% static 'js/insert_form.js' %}"></script>
+<script src="{% static 'js/filter.js' %}"></script>
+{#<script src="{% static 'js/in_out.js' %}"></script>#}
+<script src="{% static 'js/disable.js' %}"></script>
+<script src="{% static 'js/export_table.js' %}"></script>
+<script src="https://unpkg.com/vue"></script>
+
+</body>
+</html>

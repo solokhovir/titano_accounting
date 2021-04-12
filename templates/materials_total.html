@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Таблица материалов и комплектующих{% endblock %}
+
+{% block content %}
+    <h2 class="px-3 mb-3">Таблица материалов и комплектующих</h2>
+    <div class="px-3">
+        <input class="form-control" id="myInput" type="text" placeholder="Поиск..">
+        <br>
+        <div class="mb-3">
+            <button type="button" class="btn btn-success" id="click"
+                    onclick="tableToExcel('testTable', 'W3C Example Table')">
+                Экспорт таблицы
+            </button>
+        </div>
+        <table class="table table-bordered table-hover table_sort" id="tableExport">
+            <thead>
+            <tr class="table-primary">
+                <th>Наименование</th>
+                <th>Единица измерения</th>
+                <th>Поставщик</th>
+                <th>Цвет</th>
+                <th>Количество</th>
+                <th>Дата</th>
+                <th>Комментарии</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            {% for material in materials_total %}
+                <tr>
+                    <td>{{ material.materials_name }}</td>
+                    <td>{{ material.units }}</td>
+                    <td>{{ material.suppliers }}</td>
+                    <td>{{ material.colors }}</td>
+                    <td>{{ material.amount }}</td>
+                    <td>{{ material.date }}</td>
+                    <td>{{ material.comment }}</td>
+                    <td><a href="/delete_material/{{ material.id }}/">Удалить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

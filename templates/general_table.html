@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Общая таблица{% endblock %}
+
+{% block content %}
+    <h2 class="px-3 mb-3">Общая таблица</h2>
+    <div class="px-3">
+        <input class="form-control" id="myInput" type="text" placeholder="Поиск..">
+        <br>
+        <h5>Изделия</h5>
+        <table class="table table-bordered table-hover table_sort">
+            <thead>
+            <tr class="table-primary">
+                <th>Наименование</th>
+                <th>Цвет</th>
+                <th>Количество</th>
+                <th>Участок</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            {% for general in general_product %}
+                <tr>
+                    <td>{{ general.product_gen }}</td>
+                    <td>{{ general.colors_prod }}</td>
+                    <td>{{ general.amount_prod }}</td>
+                    <td>{{ general.points_prod }}</td>
+                    <td><a href="/delete_general_product/{{ general.id }}/">Удалить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h5>Детали</h5>
+        <table class="table table-bordered table-hover table_sort">
+            <thead>
+            <tr class="table-primary">
+                <th>Наименование</th>
+                <th>Цвет</th>
+                <th>Количество</th>
+                <th>Участок</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            {% for general in general_detail %}
+                <tr>
+                    <td>{{ general.detail_gen }}</td>
+                    <td>{{ general.colors_det }}</td>
+                    <td>{{ general.amount_det }}</td>
+                    <td>{{ general.points_det }}</td>
+                    <td><a href="/delete_general_detail/{{ general.id }}/">Удалить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h5>Материалы и комплектующие</h5>
+        <table class="table table-bordered table-hover table_sort">
+            <thead>
+            <tr class="table-primary">
+                <th>Наименование</th>
+                <th>Цвет</th>
+                <th>Количество</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            {% for general in general_material %}
+                <tr>
+                    <td>{{ general.material_gen }}</td>
+                    <td>{{ general.colors_mat }}</td>
+                    <td>{{ general.amount_mat }}</td>
+                    <td><a href="/delete_general_material/{{ general.id }}/">Удалить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

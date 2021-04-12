@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}Изделия{% endblock %}
+
+{% block content %}
+    <h2 class="px-5 mb-3 mt-2">Добавить изделие</h2>
+    {#    <button>Показать форму</button>#}
+    <div class="field inline specially">
+        <form method="post" action="/product" class="px-5 oldForm was-validated" autocomplete="off" id="sheepItForm">
+            {% csrf_token %}
+            <div class="forma">
+                <div id="cloneArea" rebest="yes" key="cloneArea">
+                    {#        <input type="text" name="secret" placeholder="Secret Key">#}
+                    <div class="row">
+                        <div class="input-group mb-3 col">
+                            <label class="input-group-text product_surname" for="product_surname">Фамилия</label>
+                            <input list="surnames" id="product_surname" name="surname" class="form-select"
+                                   required/>
+                            <datalist id="surnames">
+                                {% for surname in persName %}
+                                    <option>{{ surname.surname }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="input-group mb-3 col">
+                            <label class="input-group-text" for="product_point">Участок</label>
+                            <input list="points" style="width: auto" name="point" class="form-select"
+                                   id="product_point" required>
+                            <datalist id="points">
+                                {% for points in pointName %}
+                                    <option>{{ points.point_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group mb-3 col">
+                            <label class="input-group-text" for="product_name">Изделие</label>
+                            <input list="product" style="width: auto" name="production" class="form-select"
+                                   id="product_name" required>
+                            <datalist id="product">
+                                {% for product in prodName %}
+                                    <option>{{ product.product_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="input-group mb-3 col">
+                            <label class="input-group-text" for="product_color">Цвет</label>
+                            <input list="color" style="width: auto" name="color" class="form-select"
+                                   id="product_color"
+                                   required>
+                            <datalist id="color">
+                                {% for color in colorName %}
+                                    <option>{{ color.color_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group mb-3 col">
+                            <span class="input-group-text" id="basic-addon1">Количество</span>
+                            <input type="number" min="1" value="1" step="1" style="width: 50px" name="amount"
+                                   data-val="1"
+                                   class="form-control" id="product_amount">
+                        </div>
+                        <div class="input-group mb-3 col">
+                            <span class="input-group-text" id="basic-addon1">Дата: </span>
+                            <input type="date" name="date" class="form-control product_date" id="product_date"
+                                   data-val="1"
+                                   placeholder="Дата" required>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Приход или уход:</label>
+                        <select style="width: auto" name="trtype" class="form-select" id="product_in_out" data-val="1">
+                            {% for type in transaction %}
+                                <option value={{ type.id }}>{{ type.trtype }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <hr width="100%" size="5">
+                </div>
+            </div>
+            <div class="row mb-3" style="display: flex; justify-content: space-between;">
+                <div class="col">
+                    <input type="button" id="addField" class="btn btn-outline-dark add"
+                           value="Добавить поле">
+                </div>
+                <div class="col">
+                    <input type="submit" class="btn btn-success" style="float: right" id="addToTable"
+                           value="Добавить данные в таблицу" onclick="myFunction()"/>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#addField").click(function () { //
+                const links = $("[rebest='yes']").length; //кол-во элементов с req='true'
+                $("#cloneArea").clone().attr('id', 'cloneArea' + links).appendTo(".forma"); //клонируем с новы id элемент в элемент с классом forma
+                {#$("#cloneArea").clone().appendTo('.forma'); //клонируем с новы id элемент в элемент с классом forma#}
+                {##}
+                {#$("#product_surname").attr('id', 'product_surname' + links);#}
+                {#$("#product_point").attr('id', 'product_point' + links);#}
+                {#$("#product_name").attr('id', 'product_name' + links);#}
+                {#$("#product_color").attr('id', 'product_color' + links);#}
+                {#$("#product_amount").attr('id', 'product_amount' + links);#}
+                {#$("#product_date").attr('id', 'product_date' + links);#}
+                {#$("#product_in_out").attr('id', 'product_in_out' + links);#}
+            });
+
+        });
+
+        function myFunction() {
+            setTimeout(function () {
+                document.getElementById("cloneArea").submit;
+            }, 50);
+            setTimeout(function () {
+                document.getElementById("cloneArea1").submit;
+            }, 100);
+        }
+    </script>
+
+
+    {#    <script>#}
+    {#        $(document).ready(function () {#}
+    {#            $("#addField").click(function () {#}
+    {#                var sheepItForm = $('#sheepItForm').sheepIt({#}
+    {#                    separator: '',#}
+    {#                    allowRemoveLast: true,#}
+    {#                    allowRemoveCurrent: true,#}
+    {#                    allowRemoveAll: false,#}
+    {#                    allowAdd: true,#}
+    {#                    allowAddN: false,#}
+    {#                    minFormsCount: 1,#}
+    {#                    iniFormsCount: 1#}
+    {#                });#}
+    {##}
+    {#            });#}
+    {#        });#}
+    {#    </script>#}
+
+
+    {#        <script>#}
+    {#            $(function () {#}
+    {#                $(document).on('click', '.addField', function (e) {#}
+    {#                    e.preventDefault();#}
+    {##}
+    {#                    var controlForm = $(this).closest('#smth').find('form:first'),#}
+    {#                        currentEntry = $(this).parents('#cloneArea:first'),#}
+    {#                        newEntry = $(currentEntry.clone()).appendTo(controlForm),#}
+    {#                        regex = /^(.+?)(\d+)$/i,#}
+    {#                        cloneIndex = $("#cloneArea").length;#}
+    {##}
+    {#                    newEntry.find('input').val('');#}
+    {#                    // Change div id#}
+    {#                    newEntry.attr("id", "cloneArea" + cloneIndex);#}
+    {#                    controlForm.find('#cloneArea:not(:last) .btn-add')#}
+    {#.removeClass('btn-add').addClass('btn-remove')#}
+    {#.removeClass('btn-success').addClass('btn-danger')#}
+    {#                        // Not this one#}
+    {#                        //.attr("id", "entry" +  cloneIndex)#}
+    {#                        .find("*")#}
+    {#                        .each(function () {#}
+    {#                            var id = this.id || "";#}
+    {#                            var match = id.match(regex) || [];#}
+    {#                            if (match.length === 7) {#}
+    {#                                this.id = match[1] + (cloneIndex);#}
+    {#                            }#}
+    {#                        })#}
+    {#.html('<span class="icon_minus_alt2"></span>');#}
+    {#                })#}
+    {##}
+    {#                    .on('click', '.btn-remove', function (e) {#}
+    {#                        $(this).parents('.entry:first').remove();#}
+    {##}
+    {#                        e.preventDefault();#}
+    {#                        return false;#}
+    {#                    });#}
+    {#            });#}
+    {#        </script>#}
+
+{% endblock %}

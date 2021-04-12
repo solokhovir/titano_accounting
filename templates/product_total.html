@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Таблица изделий{% endblock %}
+
+{% block content %}
+    <h2 class="px-3 mb-3">Таблица изделий</h2>
+    <div class="px-3">
+        <input class="form-control" id="myInput" type="text" placeholder="Поиск..">
+        <br>
+        <div class="mb-3">
+            <button type="button" class="btn btn-success"
+                    onclick="tableToExcel('testTable', 'W3C Example Table')">
+                Экспорт таблицы
+            </button>
+        </div>
+        <table class="table table-bordered table-hover table_sort" id="tableExport">
+            <thead>
+            <tr class="table-primary">
+                <th>Наименование</th>
+                <th>Цвет</th>
+                <th>Количество</th>
+                <th>Подетальная спец.</th>
+                <th>Труд. упаковки, в сек.</th>
+                <th>Расценка, в руб.</th>
+                <th>Фамилия</th>
+                <th>Участок</th>
+                <th>Дата</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            {% for product in product_total %}
+                <tr>
+                    <td>{{ product.products }}</td>
+                    <td>{{ product.colors }}</td>
+                    <td>{{ product.amount }}</td>
+                    {#                    {% for product in product_total.product.all %}#}
+                    <td>{{ product.products_specification|join:", " }}</td>
+                    {#                    {% endfor %}#}
+                    <td>{{ product.products_packaging }}</td>
+                    <td>{{ product.products_cost }}</td>
+                    <td>{{ product.surnames }}</td>
+                    <td>{{ product.points }}</td>
+                    <td>{{ product.date }}</td>
+                    <td><a href="/delete_product/{{ product.id }}/">Удалить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {#    {% include "pagination.html" with page=posts %}#}
+
+    {#    <div class="pagination">#}
+    {#        <span class="step-links">#}
+    {#            {% if page_obj.has_previous %}#}
+    {#                <a href="?page=1">&laquo; first</a>#}
+    {#                <a href="?page={{ page_obj.previous_page_number }}">previous</a>#}
+    {#            {% endif %}#}
+    {##}
+    {#            <span class="current">#}
+    {#                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.#}
+    {#            </span>#}
+    {##}
+    {#            {% if page_obj.has_next %}#}
+    {#                <a href="?page={{ page_obj.next_page_number }}">next</a>#}
+    {#                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>#}
+    {#            {% endif %}#}
+    {#        </span>#}
+    {#    </div>#}
+
+{% endblock %}

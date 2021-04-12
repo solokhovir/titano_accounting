@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Материалы или комплектующие{% endblock %}
+
+{% block content %}
+    <h2 class="px-5 mb-3">Добавить материалы или комплектующие</h2>
+    <form method="post" action="/materials" class="px-5 was-validated">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="inputGroupSelect01">Материал</label>
+                <input list="material" style="width: auto" name="material" class="form-select" id="inputGroupSelect01"
+                       required>
+                <datalist id="material">
+                    {% for material in materialsName %}
+                        <option>{{ material.material_name }}
+                    {% endfor %}
+                </datalist>
+            </div>
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="inputGroupSelect01">Единица измерения</label>
+                <select style="width: auto" name="unit" class="form-select" id="inputGroupSelect01">
+                    {% for unit in unName %}
+                        <option value={{ unit.id }}>{{ unit.unit_name }}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="inputGroupSelect01">Цвет</label>
+                <input list="color" style="width: auto" name="color" class="form-select" id="inputGroupSelect01"
+                       required>
+                <datalist id="color">
+                    {% for color in colorName %}
+                        <option>{{ color.color_name }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="inputGroupSelect01">Поставщик</label>
+                <input list="supplier" style="width: auto" name="supplier" class="form-select" id="inputGroupSelect01"
+                       required>
+                <datalist id="supplier">
+                    {% for supplier in suppName %}
+                        <option>{{ supplier.supplier_name }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group mb-3 col">
+                <span class="input-group-text" id="basic-addon1">Количество</span>
+                <input type="number" min="1" value="1" step="1" style="width: 50px" name="amount" class="form-control"
+                       id="exampleFormControlInput1">
+            </div>
+            <div class="input-group mb-3 col">
+                <span class="input-group-text" id="basic-addon1">Дата: </span>
+                <input type="date" name="date" class="form-control" id="exampleFormControlInput1" placeholder="Дата"
+                       required>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Комментарий</span>
+            <textarea class="form-control" name="comment" aria-label="comment"></textarea>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Приход или уход:</label>
+            <select style="width: auto" name="trtype" class="form-select" id="inputGroupSelect01">
+                {% for type in transaction %}
+                    <option value={{ type.id }}>{{ type.trtype }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="row" style="display: flex; justify-content: space-between;">
+            <div class="col">
+                <input type="button" id="addField" class="btn btn-outline-dark" value="Добавить поле">
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-success" style="float: right"
+                       value="Добавить данные в таблицу"/>
+            </div>
+        </div>
+    </form>
+{% endblock %}

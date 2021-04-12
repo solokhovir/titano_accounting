@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Таблица деталей{% endblock %}
+
+{% block content %}
+    <h2 class="px-3 mb-3">Таблица деталей</h2>
+    <div class="px-3">
+        <input class="form-control" id="myInput" type="text" placeholder="Поиск..">
+        <br>
+        <div class="mb-3">
+            <button type="button" class="btn btn-success" id="click"
+                    onclick="tableToExcel('testTable', 'W3C Example Table')">
+                Экспорт таблицы
+            </button>
+        </div>
+        <table class="table table-bordered table-hover table_sort" id="tableExport">
+            <thead>
+            <tr class="table-primary">
+                <th>Наименование</th>
+                <th>Цвет</th>
+                <th>Количество</th>
+                <th>Трудоемкость изгот., в сек.</th>
+                <th>Расценка, в руб.</th>
+                <th>Фамилия</th>
+                <th>Участок</th>
+                <th>Дата</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            {% for detail in detail_total %}
+                <tr>
+                    <td>{{ detail.detail }}</td>
+                    <td>{{ detail.colors }}</td>
+                    <td>{{ detail.amount }}</td>
+                    <td>{{ detail.details_labor }}</td>
+                    <td>{{ detail.details_cost }}</td>
+                    <td>{{ detail.surnames }}</td>
+                    <td>{{ detail.points }}</td>
+                    <td>{{ detail.date }}</td>
+                    <td><a href="/delete_detail/{{ detail.id }}/">Удалить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

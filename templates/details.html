@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Детали{% endblock %}
+
+{% block content %}
+    <h2 class="px-5 mb-3">Добавить деталь</h2>
+    <form method="post" action="/details" class="px-5 was-validated">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="inputGroupSelect01">Фамилия</label>
+                <input list="surnames" id="inputGroupSelect01" name="surname" class="form-select" required/>
+                <datalist id="surnames">
+                    {% for surname in persName %}
+                        <option>{{ surname.surname }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="inputGroupSelect01">Участок</label>
+                <input list="points" style="width: auto" name="point" class="form-select" id="inputGroupSelect01"
+                       required>
+                <datalist id="points">
+                    {% for points in pointName %}
+                        <option>{{ points.point_name }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="inputGroupSelect01">Деталь</label>
+                <input list="details" style="width: auto" name="details" class="form-select" id="inputGroupSelect01"
+                       required>
+                <datalist id="details">
+                    {% for details in detailName %}
+                        <option>{{ details.detail_name }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="inputGroupSelect01" id="colr">Цвет</label>
+                <input list="color" style="width: auto" name="color" class="form-select" id="inputGroupSelect01"
+                       required>
+                <datalist id="color">
+                    {% for color in colorName %}
+                        <option>{{ color.color_name }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group mb-3 col">
+                <span class="input-group-text" id="basic-addon1">Количество</span>
+                <input type="number" min="1" value="1" step="1" style="width: 50px" name="amount" class="form-control"
+                       id="exampleFormControlInput1">
+            </div>
+            <div class="input-group mb-3 col">
+                <span class="input-group-text" id="basic-addon1">Дата: </span>
+                <input type="date" name="date" class="form-control" id="exampleFormControlInput1" placeholder="Дата"
+                       required>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Приход или уход:</label>
+            <select style="width: auto" name="trtype" class="form-select" id="inputGroupSelect01">
+                {% for type in transaction %}
+                    <option value={{ type.id }}>{{ type.trtype }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="row" style="display: flex; justify-content: space-between;">
+            <div class="col">
+                <input type="button" id="addField" class="btn btn-outline-dark" value="Добавить поле">
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-success" style="float: right"
+                       value="Добавить данные в таблицу"/>
+            </div>
+        </div>
+    </form>
+{% endblock %}
